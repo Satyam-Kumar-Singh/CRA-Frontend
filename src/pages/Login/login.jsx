@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../Styles/Login/login.css';
 import registerUser from '../../services/api/registerApi';
+import loginUser from '../../services/api/loginApi';
 
 import { ReactComponent as Logo } from '../../assets/images/Login/logo.svg';
 import { ReactComponent as Register } from '../../assets/images/Login/register.svg';
@@ -18,7 +19,7 @@ const SignInSignUp = () => {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-    
+
     const username = event.target.username.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
@@ -35,35 +36,55 @@ const SignInSignUp = () => {
     }
   };
 
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    const username = event.target.username.value;
+    const password = event.target.password.value;
+
+    try {
+      const credentials = { username, password };
+      const response = await loginUser(credentials);
+
+      // Handle success, e.g., save token, redirect, etc.
+      console.log('Login successful', response);
+    } catch (error) {
+      // Handle error, e.g., show an error message
+      console.error('Login error:', error.message);
+    }
+  };
+
   return (
     <div className={`container ${isSignUp ? 'sign-up-mode' : ''}`}>
       <div className="forms-container">
         <div className="signin-signup">
-          <form action="#" className={`sign-in-form ${isSignUp ? 'hidden' : ''}`}>
+          <form onSubmit={handleLogin} className={`sign-in-form ${isSignUp ? 'hidden' : ''}`}>
             <h2 className="title">Sign in</h2>
             <div className="input-field">
               <i className="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
+              <input type="text" name= "username" placeholder="Username" />
             </div>
             <div className="input-field">
               <i className="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <input type="password" name= "password" placeholder="Password" />
             </div>
             <input type="submit" value="Login" className="btn solid" />
           </form>
+
+
           <form onSubmit={handleSignUp} className={`sign-up-form ${isSignUp ? '' : 'hidden'}`}>
             <h2 className="title">Sign up</h2>
             <div className="input-field">
               <i className="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
+              <input type="text" name="username" placeholder="Username" />
             </div>
             <div className="input-field">
               <i className="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" />
+              <input type="email" name="email" placeholder="Email" />
             </div>
             <div className="input-field">
               <i className="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <input type="password" name="password" placeholder="Password" />
             </div>
             <input type="submit" className="btn" value="Sign up" />
           </form>
