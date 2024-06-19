@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import '../Styles/Login/login.css';
-import registerUser from '../../services/api/registerApi';
-import loginUser from '../../services/api/loginApi';
+import React, { useState } from "react";
+import "../Styles/Login/login.css";
+import registerUser from "../../services/api/registerApi";
+import loginUser from "../../services/api/loginApi";
 
-import { ReactComponent as Logo } from '../../assets/images/Login/logo.svg';
-import { ReactComponent as Register } from '../../assets/images/Login/register.svg';
+import { ReactComponent as Logo } from "../../assets/images/Login/logo.svg";
+import { ReactComponent as Register } from "../../assets/images/Login/register.svg";
 
 const SignInSignUp = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -29,10 +29,10 @@ const SignInSignUp = () => {
       const response = await registerUser(userData);
 
       // Handle success, e.g., show a success message or redirect to login
-      console.log('Registration successful', response);
+      console.log("Registration successful", response);
     } catch (error) {
       // Handle error, e.g., show an error message
-      console.error('Registration error:', error.message);
+      console.error("Registration error:", error.message);
     }
   };
 
@@ -47,32 +47,37 @@ const SignInSignUp = () => {
       const response = await loginUser(credentials);
 
       // Handle success, e.g., save token, redirect, etc.
-      console.log('Login successful', response);
+      console.log("Login successful", response);
     } catch (error) {
       // Handle error, e.g., show an error message
-      console.error('Login error:', error.message);
+      console.error("Login error:", error.message);
     }
   };
 
   return (
-    <div className={`container ${isSignUp ? 'sign-up-mode' : ''}`}>
+    <div className={`container ${isSignUp ? "sign-up-mode" : ""}`}>
       <div className="forms-container">
         <div className="signin-signup">
-          <form onSubmit={handleLogin} className={`sign-in-form ${isSignUp ? 'hidden' : ''}`}>
+          <form
+            onSubmit={handleLogin}
+            className={`sign-in-form ${isSignUp ? "hidden" : ""}`}
+          >
             <h2 className="title">Sign in</h2>
             <div className="input-field">
               <i className="fas fa-user"></i>
-              <input type="text" name= "username" placeholder="Username" />
+              <input type="text" name="username" placeholder="Username" />
             </div>
             <div className="input-field">
               <i className="fas fa-lock"></i>
-              <input type="password" name= "password" placeholder="Password" />
+              <input type="password" name="password" placeholder="Password" />
             </div>
             <input type="submit" value="Login" className="btn solid" />
           </form>
 
-
-          <form onSubmit={handleSignUp} className={`sign-up-form ${isSignUp ? '' : 'hidden'}`}>
+          <form
+            onSubmit={handleSignUp}
+            className={`sign-up-form ${isSignUp ? "" : "hidden"}`}
+          >
             <h2 className="title">Sign up</h2>
             <div className="input-field">
               <i className="fas fa-user"></i>
@@ -96,10 +101,14 @@ const SignInSignUp = () => {
           <div className="content">
             <h3>New here ?</h3>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
+              Sign up now and start exploring! Create an account to access our
+              features and get started today.
             </p>
-            <button className="btn transparent" id="sign-up-btn" onClick={switchToSignUp}>
+            <button
+              className="btn transparent"
+              id="sign-up-btn"
+              onClick={switchToSignUp}
+            >
               Sign up
             </button>
           </div>
@@ -109,10 +118,14 @@ const SignInSignUp = () => {
           <div className="content">
             <h3>One of us ?</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
+              Sign in to access your account and pick up where you left off.
+              Enter your username and password to get started!
             </p>
-            <button className="btn transparent" id="sign-in-btn" onClick={switchToSignIn}>
+            <button
+              className="btn transparent"
+              id="sign-in-btn"
+              onClick={switchToSignIn}
+            >
               Sign in
             </button>
           </div>
