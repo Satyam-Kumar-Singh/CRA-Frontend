@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../Styles/Login/login.css';
+import registerUser from '../../services/api/registerApi';
 
 import { ReactComponent as Logo } from '../../assets/images/Login/logo.svg';
 import { ReactComponent as Register } from '../../assets/images/Login/register.svg';
@@ -13,6 +14,25 @@ const SignInSignUp = () => {
 
   const switchToSignIn = () => {
     setIsSignUp(false);
+  };
+
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    
+    const username = event.target.username.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    try {
+      const userData = { username, email, password };
+      const response = await registerUser(userData);
+
+      // Handle success, e.g., show a success message or redirect to login
+      console.log('Registration successful', response);
+    } catch (error) {
+      // Handle error, e.g., show an error message
+      console.error('Registration error:', error.message);
+    }
   };
 
   return (
@@ -31,7 +51,7 @@ const SignInSignUp = () => {
             </div>
             <input type="submit" value="Login" className="btn solid" />
           </form>
-          <form action="#" className={`sign-up-form ${isSignUp ? '' : 'hidden'}`}>
+          <form onSubmit={handleSignUp} className={`sign-up-form ${isSignUp ? '' : 'hidden'}`}>
             <h2 className="title">Sign up</h2>
             <div className="input-field">
               <i className="fas fa-user"></i>
